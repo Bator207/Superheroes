@@ -28,33 +28,40 @@ def comprobarDia(strNumero):
         if numero in dia.keys():
             return dia[numero]
     except:
-        print('{} no es un numero'.format(numero))
+        print('{} no es un numero'.format(strNumero))
 
-    # try:
-    #     numero=int(strNumero)
-    #     if numero in dia.keys():
-    #         return dia[numero]
-    #     else:
-    #         print('{} no es un numero'.format(numero))
-    # except:
-    #     pass
+def comprobarMes(strNumero):
+    try:
+        numero=int(strNumero)
+        if numero in mes.keys():
+            return mes[numero]
+    except:
+        print('{} no es un numero'.format(strNumero))
 
-
-
-
+def comprobarAny(strNumero):
+    try:
+        numero=int(strNumero[-1])
+        if numero in any.keys():
+            return any[numero]
+    except:
+        print('{} no es un numero'.format(strNumero))
 
 if __name__=='__main__':
     superheroe=''
-    arma=''
     # sh=SuperHeroe()
     nom=input('Introduce tu nombre: ')
     cognom=input('Introduce tu apellido: ')
-    dia=input('Introduce el dia que naciste: ')
+    diaN=input('Introduce el dia que naciste: (Formato númerico)')
+    mesN=input('Introduce el mes que naciste: (Formato númerico)')
+    anyN=input('Introduce el año que naciste: (Formato númerico)')
 
     superheroe+=comprobarNombre(nom)
     superheroe+=' '
     superheroe+=comprobarApellido(cognom)
     print(superheroe)
-    arma=comprobarDia(dia)
+    arma=comprobarDia(diaN)
     print(arma)
-
+    superpoder=comprobarMes(mesN)
+    print(superpoder)
+    traje=comprobarAny(anyN)
+    print(traje)
