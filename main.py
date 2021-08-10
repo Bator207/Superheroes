@@ -1,67 +1,41 @@
 from config import *
 
-# class SuperHeroe():
-#     def __init__(self):
-#         self.superheroe=''
-#         self.traje=''
-#         self.superpoder=''
-#         self.arma=''
-        
-
-def comprobarNombre(nom):
+def comprobarNombre(nom,dic):
     letra=nom[0].upper()
-    if letra in nombre:
-        return nombre[letra]
+    if letra in dic:
+        return dic[letra]
     else:
         print('{} no es una letra'.format(nom[0]))
 
-def comprobarApellido(nom):
-    letra=nom[0].upper()
-    if letra in apellido:
-        return apellido[letra]
-    else:
-        print('{} no es una letra'.format(nom[0]))
-
-def comprobarDia(strNumero):
+def comprobarNumero(strNumero,dic):
     try:
         numero=int(strNumero)
-        if numero in dia.keys():
-            return dia[numero]
+        if numero in dic.keys():
+            return dic[numero]
     except:
         print('{} no es un numero'.format(strNumero))
 
-def comprobarMes(strNumero):
+def ultimoNumero(strNumero):
     try:
-        numero=int(strNumero)
-        if numero in mes.keys():
-            return mes[numero]
+        return int(strNumero[-1])
     except:
         print('{} no es un numero'.format(strNumero))
 
-def comprobarAny(strNumero):
-    try:
-        numero=int(strNumero[-1])
-        if numero in any.keys():
-            return any[numero]
-    except:
-        print('{} no es un numero'.format(strNumero))
+def frase(sh,co,ar,sp):
+    return ('Soy {} {}, mi poder es el {} y voy a luchar contra la injusticia con mi {}!!'.format(sh,co,sp,ar))
 
 if __name__=='__main__':
     superheroe=''
-    # sh=SuperHeroe()
     nom=input('Introduce tu nombre: ')
     cognom=input('Introduce tu apellido: ')
     diaN=input('Introduce el dia que naciste: (Formato númerico)')
     mesN=input('Introduce el mes que naciste: (Formato númerico)')
     anyN=input('Introduce el año que naciste: (Formato númerico)')
 
-    superheroe+=comprobarNombre(nom)
+    superheroe+=comprobarNombre(nom,nombre)
     superheroe+=' '
-    superheroe+=comprobarApellido(cognom)
-    print(superheroe)
-    arma=comprobarDia(diaN)
-    print(arma)
-    superpoder=comprobarMes(mesN)
-    print(superpoder)
-    traje=comprobarAny(anyN)
-    print(traje)
+    superheroe+=comprobarNombre(cognom,apellido)
+    arma=comprobarNumero(diaN,dia)
+    superpoder=comprobarNumero(mesN,mes)
+    traje=comprobarNumero(ultimoNumero(anyN),any)
+    print(frase(superheroe,traje,arma,superpoder))
