@@ -1,9 +1,11 @@
 from config import *
 from datetime import datetime
 
+# Función que te devuelve la frase del superheroe
 def frase(sh,co,ar,sp):
     return ('Soy {} {}, mi poder es el {} y voy a luchar contra la injusticia con mi {}!!'.format(sh,co,sp,ar))
 
+# Funcion para sacar la primera y comprobar que sea correcta
 def comprobarNombre(dic,frase):
     salida=False
     cadena=input(frase)
@@ -19,14 +21,25 @@ def comprobarNombre(dic,frase):
             cadena=input(frase)
     return dic[letra]
 
-def comprobarNumero(dic,frase,tipo):
+# Funcion donde se pide la fecha de nacimiento
+def pedirFecha():
+    fecha=[]
+    tipo=('dia','mes','año')
+    for i in range (3):
+        frase='Introduce el {} que naciste: (Formato númerico)'.format(tipo[i])
+        cadena=__comprobarNumero(frase,tipo[i])
+        fecha.append(cadena)
+    return fecha
+
+# Función para comprobar la fecha
+def __comprobarNumero(frase,tipo):
     salida=False
     cadena=input(frase)
     while not salida:
         if cadena == '':
             print('ERROR!!!! No puede ser vacio')    
             cadena=input(frase) 
-        if tipo=='D':
+        if tipo=='dia' or tipo=='mes':
             if len(cadena)<=2 and cadena!='0':
                 try:
                     numero=int(cadena)
@@ -35,9 +48,9 @@ def comprobarNumero(dic,frase,tipo):
                     print('{} no es un número'.format(cadena))
                     cadena=input(frase)
             else:
-                print('ERROR!!!! No puede tener mas de 2 números y no ser 0')    
+                print('ERROR!!!! El {} no puede tener mas de 2 números y no ser 0'.format(tipo))
                 cadena=input(frase)
-        if tipo=='A':
+        if tipo=='año':
             if len(cadena)==4 and cadena!='0':
                 try:
                     numero=int(cadena)
@@ -56,45 +69,39 @@ def ultimoNumero(strNumero):
     except:
         print('{} no es un numero'.format(strNumero))
 
-def comprobarFecha(d,m,a):
+def comprobarFecha(fecha):
     actual=datetime.now()
-    if a==actual.year:
-        if m<=actual.month:
-            if d<=actual.day:
-                #fecha correcta
-                print('fecha introducida {} {} {}'.format(d,m,a))
-                print('fecha actual {} {} {}'.format(actual.day,actual.month,actual.year))
+    if fecha[2]==actual.year:
+        if fecha[1]<=actual.month:
+            if fecha[0]<=actual.day:
+                # Fecha correcta
+                return fecha
             else:
+                # Fecha incorrecta, volver a comprobar de nuevo dia
                 print('Todavia no has nacido')
-                # comprobar de nuevo dia
-                print('fecha introducida {} {} {}'.format(d,m,a))
-                print('fecha actual {} {} {}'.format(actual.day,actual.month,actual.year))
+                fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia')
         else:
-            print('llegaste a else mes')
-            #comprobar de nuevo mes
-            print('fecha introducida {} {} {}'.format(d,m,a))
-            print('fecha actual {} {} {}'.format(actual.day,actual.month,actual.year))
-    elif a>1900 and a<actual.year:
-        # fecha correcta, comprobar nombres
-        print('llegaste a elif año')
-        print('fecha introducida {} {} {}'.format(d,m,a))
-        print('fecha actual {} {} {}'.format(actual.day,actual.month,actual.year))
+            # Fecha incorrecta, volver a comprobar de nuevo mes
+            print('Todavia no has nacido')
+            fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes')
+    elif fecha[2]>1900 and fecha[2]<actual.year:
+        # Fecha correcta
+        return fecha
     else:
-        # comprobar año
-        print('llegaste a else año')
-        print('fecha introducida {} {} {}'.format(d,m,a))
-        print('fecha actual {} {} {}'.format(actual.day,actual.month,actual.year))
+        # Fecha incorrecta, volver a comprobar de nuevo mes
+        print('Todavia no has nacido')
+        fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año')
 
 
 if __name__=='__main__':
     fecha=[]
-    comprobarFecha(13,8,2021)
+    # comprobarFecha(13,8,2021)
     # superheroe="{} {}".format(comprobarNombre(nombre,'Introduce tu nombre: '),comprobarNombre(apellido,'Introduce tu apellido: '))
-    # f=comprobarNumero(dia,'Introduce el dia que naciste: (Formato númerico)','D')
+    f=pedirFecha()
+    f=comprobarFecha(f)
     # fecha.append(f)
     # f=comprobarNumero(mes,'Introduce el mes que naciste: (Formato númerico)','D')
     # fecha.append(f)
     # f=comprobarNumero(any,'Introduce el año que naciste: (Formato númerico)','A')
     # fecha.append(f)
-    # print(fecha)
     # print(frase(superheroe,traje,arma,superpoder))
