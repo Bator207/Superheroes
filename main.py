@@ -27,14 +27,14 @@ def pedirFecha():
     tipo=('dia','mes','año')
     for i in range (3):
         frase='Introduce el {} que naciste: (Formato númerico)'.format(tipo[i])
-        cadena=__comprobarNumero(frase,tipo[i])
+        strNumero=input(frase)
+        cadena=__comprobarNumero(frase,tipo[i],strNumero)
         fecha.append(cadena)
     return fecha
 
 # Función para comprobar la fecha
-def __comprobarNumero(frase,tipo):
+def __comprobarNumero(frase,tipo,cadena):
     salida=False
-    cadena=input(frase)
     while not salida:
         if cadena == '':
             print('ERROR!!!! No puede ser vacio')    
@@ -64,44 +64,46 @@ def __comprobarNumero(frase,tipo):
     return numero
 
 def ultimoNumero(strNumero):
-    try:
-        return int(strNumero[-1])
-    except:
-        print('{} no es un numero'.format(strNumero))
+    strNumero=str(strNumero)
+    return int(strNumero[-1])
 
 def comprobarFecha(fecha):
     actual=datetime.now()
-    if fecha[2]==actual.year:
-        if fecha[1]<=actual.month:
-            if fecha[0]<=actual.day:
-                # Fecha correcta
-                return fecha
+    nacimiento=False
+    while not nacimiento:
+        if fecha[2]>1900 and fecha[2]<=actual.year:
+            if fecha[1]<=actual.month:
+                if fecha[0]<=actual.day:
+                    # Fecha correcta
+                    nacimiento=True
+                else:
+                    # Fecha incorrecta, volver a comprobar de nuevo dia
+                    print('Todavia no has nacido')
+                    strNumero=input('Introduce el {} que naciste: (Formato númerico)'.format('dia'))
+                    fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia',strNumero)
             else:
-                # Fecha incorrecta, volver a comprobar de nuevo dia
-                print('Todavia no has nacido')
-                fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia')
+                # Fecha incorrecta, volver a comprobar de nuevo mes
+                print('Todavia no has nacido 1')
+                strNumero=input('Introduce el {} que naciste: (Formato númerico)'.format('mes'))
+                fecha[1]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes',strNumero)
         else:
             # Fecha incorrecta, volver a comprobar de nuevo mes
-            print('Todavia no has nacido')
-            fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes')
-    elif fecha[2]>1900 and fecha[2]<actual.year:
-        # Fecha correcta
-        return fecha
-    else:
-        # Fecha incorrecta, volver a comprobar de nuevo mes
-        print('Todavia no has nacido')
-        fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año')
+            print('Todavia no has nacido 2')
+            strNumero=input('Introduce el {} que naciste: (Formato númerico)'.format('año'))
+            fecha[2]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año',strNumero)
+    return fecha
 
+def armaTrajeSuperpoder(fecha):
+    sh=[]
+    sh.append(dia[fecha[0]])
+    sh.append(mes[fecha[1]])
+    un=ultimoNumero(fecha[2])
+    sh.append(any[un])
+    return sh
 
 if __name__=='__main__':
-    fecha=[]
-    # comprobarFecha(13,8,2021)
-    # superheroe="{} {}".format(comprobarNombre(nombre,'Introduce tu nombre: '),comprobarNombre(apellido,'Introduce tu apellido: '))
+    superheroe="{} {}".format(comprobarNombre(nombre,'Introduce tu nombre: '),comprobarNombre(apellido,'Introduce tu apellido: '))
     f=pedirFecha()
     f=comprobarFecha(f)
-    # fecha.append(f)
-    # f=comprobarNumero(mes,'Introduce el mes que naciste: (Formato númerico)','D')
-    # fecha.append(f)
-    # f=comprobarNumero(any,'Introduce el año que naciste: (Formato númerico)','A')
-    # fecha.append(f)
-    # print(frase(superheroe,traje,arma,superpoder))
+    sh=armaTrajeSuperpoder(f)
+    print(frase(superheroe,sh[2],sh[0],sh[1]))
