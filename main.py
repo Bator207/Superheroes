@@ -1,5 +1,6 @@
 from config import *
 from datetime import datetime
+from presentacion import *
 
 # Función que te devuelve la frase del superheroe
 def frase(sh,co,ar,sp):
@@ -8,17 +9,19 @@ def frase(sh,co,ar,sp):
 # Funcion para sacar la primera y comprobar que sea correcta
 def comprobarNombre(dic,frase):
     salida=False
-    cadena=input(frase)
+    cadena=Input(frase,line=1,column=5)
     while not salida:
         if cadena == '':
-            print('ERROR!!!! No puede ser vacio')    
-            cadena=input(frase)
+            Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
+            cadena=Input(frase,line=1,column=5)
+        clearLine(25)
         letra=cadena[0].upper()
         if letra in dic:
             salida=True
         else:
-            print('{} no es una letra'.format(cadena[0]))
-            cadena=input(frase)
+            Print('{} no es una letra'.format(cadena[0]),line=25,column=1,style='bold',color='yellow', back='red')
+            cadena=Input(frase,line=1,column=5)
+        clearLine(25)
     return dic[letra]
 
 # Funcion donde se pide la fecha de nacimiento
@@ -26,8 +29,8 @@ def pedirFecha():
     fecha=[]
     tipo=('dia','mes','año')
     for i in range (3):
-        frase='Introduce el {} que naciste: (Formato númerico)'.format(tipo[i])
-        strNumero=input(frase)
+        frase='Introduce el {} que naciste: (Formato númerico) '.format(tipo[i])
+        strNumero=Input(frase,line=1,column=5)
         cadena=__comprobarNumero(frase,tipo[i],strNumero)
         fecha.append(cadena)
     return fecha
@@ -37,30 +40,35 @@ def __comprobarNumero(frase,tipo,cadena):
     salida=False
     while not salida:
         if cadena == '':
-            print('ERROR!!!! No puede ser vacio')    
-            cadena=input(frase) 
+            Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
+            cadena=Input(frase,line=1,column=5)
+        clearLine(25)
         if tipo=='dia' or tipo=='mes':
             if len(cadena)<=2 and cadena!='0':
                 try:
                     numero=int(cadena)
                     salida=True
                 except:
-                    print('{} no es un número'.format(cadena))
-                    cadena=input(frase)
+                    Print('{} no es un número'.format(cadena),line=25,column=1,style='bold',color='yellow', back='red')
+                    cadena=Input(frase,line=1,column=5)
+                clearLine(25)
             else:
-                print('ERROR!!!! El {} no puede tener mas de 2 números y no ser 0'.format(tipo))
-                cadena=input(frase)
+                Print('ERROR!!!! El {} no puede tener mas de 2 números y no ser 0'.format(tipo),line=25,column=1,style='bold',color='yellow', back='red')
+                cadena=Input(frase,line=1,column=5)
+            clearLine(25)
         if tipo=='año':
             if len(cadena)==4 and cadena!='0':
                 try:
                     numero=int(cadena)
                     salida=True
                 except:
-                    print('{} no es un número'.format(cadena))
-                    cadena=input(frase)
+                    Print('{} no es un número'.format(cadena),line=25,column=1,style='bold',color='yellow', back='red')
+                    cadena=Input(frase,line=1,column=5)
+                clearLine(25)
             else:
-                print('ERROR!!!! El año tiene que tener 4 números o no ser 0')    
-                cadena=input(frase)
+                Print('ERROR!!!! El año tiene que tener 4 números o no ser 0',line=25,column=1,style='bold',color='yellow', back='red')
+                cadena=Input(frase,line=1,column=5)
+            clearLine(25)
     return numero
 
 def ultimoNumero(strNumero):
@@ -78,19 +86,22 @@ def comprobarFecha(fecha):
                     nacimiento=True
                 else:
                     # Fecha incorrecta, volver a comprobar de nuevo dia
-                    print('Todavia no has nacido')
-                    strNumero=input('Introduce el {} que naciste: (Formato númerico)'.format('dia'))
+                    print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+                    strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('dia'),line=1,column=5)
                     fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia',strNumero)
+                clearLine(25)
             else:
                 # Fecha incorrecta, volver a comprobar de nuevo mes
-                print('Todavia no has nacido 1')
-                strNumero=input('Introduce el {} que naciste: (Formato númerico)'.format('mes'))
+                print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+                strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('mes'),line=1,column=5)
                 fecha[1]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes',strNumero)
+            clearLine(25)
         else:
             # Fecha incorrecta, volver a comprobar de nuevo mes
-            print('Todavia no has nacido 2')
-            strNumero=input('Introduce el {} que naciste: (Formato númerico)'.format('año'))
+            print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+            strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('año'),line=1,column=5)
             fecha[2]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año',strNumero)
+        clearLine(25)
     return fecha
 
 def armaTrajeSuperpoder(fecha):
@@ -102,8 +113,9 @@ def armaTrajeSuperpoder(fecha):
     return sh
 
 if __name__=='__main__':
+    limpiar()
     superheroe="{} {}".format(comprobarNombre(nombre,'Introduce tu nombre: '),comprobarNombre(apellido,'Introduce tu apellido: '))
     f=pedirFecha()
     f=comprobarFecha(f)
     sh=armaTrajeSuperpoder(f)
-    print(frase(superheroe,sh[2],sh[0],sh[1]))
+    Print(frase(superheroe,sh[2],sh[0],sh[1]),line=5,column=5)
