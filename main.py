@@ -79,26 +79,28 @@ def comprobarFecha(fecha):
     actual=datetime.now()
     nacimiento=False
     while not nacimiento:
-        if fecha[0]>1900 and fecha[2]<=actual.year:
+        if fecha[0]>1900 and fecha[2]<=(actual.year-1):
+            nacimiento=True
+        elif fecha[2]<=actual.year:
             if fecha[1]<=actual.month:
                 if fecha[2]<=actual.day:
                     # Fecha correcta
                     nacimiento=True
                 else:
                     # Fecha incorrecta, volver a comprobar de nuevo dia
-                    print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+                    Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
                     strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('dia'),line=1,column=5)
                     fecha[2]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia',strNumero)
                 clearLine(25)
             else:
                 # Fecha incorrecta, volver a comprobar de nuevo mes
-                print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+                Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
                 strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('mes'),line=1,column=5)
                 fecha[1]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes',strNumero)
             clearLine(25)
         else:
             # Fecha incorrecta, volver a comprobar de nuevo mes
-            print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+            Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
             strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('año'),line=1,column=5)
             fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año',strNumero)
         clearLine(25)
@@ -106,9 +108,9 @@ def comprobarFecha(fecha):
 
 def armaTrajeSuperpoder(fecha):
     sh=[]
-    sh.append(dia[fecha[0]])
+    sh.append(dia[fecha[2]])
     sh.append(mes[fecha[1]])
-    un=ultimoNumero(fecha[2])
+    un=ultimoNumero(fecha[0])
     sh.append(any[un])
     return sh
 
