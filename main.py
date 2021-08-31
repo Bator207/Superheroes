@@ -26,86 +26,99 @@ def comprobarNombre(dic,frase):
     return dic[letra]
 
 # Funcion donde se pide la fecha de nacimiento
-def pedirFecha():
+def fecha():
     fecha=[]
     tipo=('año','mes','dia')
-    for i in range (3):
-        frase='Introduce el {} que naciste: (Formato númerico) '.format(tipo[i])
-        strNumero=Input(frase,line=1,column=5)
-        cadena=__comprobarNumero(frase,tipo[i],strNumero)
-        fecha.append(cadena)
-    return fecha
-
-# Función para comprobar la fecha
-def __comprobarNumero(frase,tipo,cadena):
-    salida=False
-    while not salida:
-        if cadena == '':
-            Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
-            cadena=Input(frase,line=1,column=5)
-        clearLine(25)
-        if tipo=='dia' or tipo=='mes':
-            if len(cadena)<=2 and cadena!='0':
-                try:
-                    numero=int(cadena)
-                    salida=True
-                except:
-                    Print('{} no es un número'.format(cadena),line=25,column=1,style='bold',color='yellow', back='red')
-                    cadena=Input(frase,line=1,column=5)
-                clearLine(25)
-            else:
-                Print('ERROR!!!! El {} no puede tener mas de 2 números y no ser 0'.format(tipo),line=25,column=1,style='bold',color='yellow', back='red')
-                cadena=Input(frase,line=1,column=5)
-            clearLine(25)
-        if tipo=='año':
-            if len(cadena)==4 and cadena!='0':
-                try:
-                    numero=int(cadena)
-                    salida=True
-                except:
-                    Print('{} no es un número'.format(cadena),line=25,column=1,style='bold',color='yellow', back='red')
-                    cadena=Input(frase,line=1,column=5)
-                clearLine(25)
-            else:
-                Print('ERROR!!!! El año tiene que tener 4 números o no ser 0',line=25,column=1,style='bold',color='yellow', back='red')
-                cadena=Input(frase,line=1,column=5)
-            clearLine(25)
-    return numero
-
-def ultimoNumero(strNumero):
-    strNumero=str(strNumero)
-    return int(strNumero[-1])
-
-def comprobarFecha(fecha):
-    actual=datetime.now()
     nacimiento=False
-    while not nacimiento:
-        if fecha[0]>1900 and fecha[2]<=(actual.year-1):
-            nacimiento=True
-        elif fecha[2]<=actual.year:
-            if fecha[1]<=actual.month:
-                if fecha[2]<=actual.day:
-                    # Fecha correcta
-                    nacimiento=True
-                else:
-                    # Fecha incorrecta, volver a comprobar de nuevo dia
-                    Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
-                    strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('dia'),line=1,column=5)
-                    fecha[2]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia',strNumero)
-                clearLine(25)
-            else:
-                # Fecha incorrecta, volver a comprobar de nuevo mes
-                Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
-                strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('mes'),line=1,column=5)
-                fecha[1]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes',strNumero)
-            clearLine(25)
-        else:
-            # Fecha incorrecta, volver a comprobar de nuevo mes
-            Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
-            strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('año'),line=1,column=5)
-            fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año',strNumero)
-        clearLine(25)
-    return fecha
+    for i in tipo:
+        frase='Introduce el {} que naciste: (Formato númerico) '.format(tipo)
+        while not nacimiento:
+            cadena=Input(frase,line=1,column=5)
+            if cadena=='':
+                Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
+            if i == 'dia':
+                pass
+
+# def pedirFecha():
+#     fecha=[]
+#     tipo=('año','mes','dia')
+#     for i in range (3):
+#         frase='Introduce el {} que naciste: (Formato númerico) '.format(tipo[i])
+#         strNumero=Input(frase,line=1,column=5)
+#         cadena=__comprobarNumero(frase,tipo[i],strNumero)
+#         fecha.append(cadena)
+#     return fecha
+
+# # Función para comprobar la fecha
+# def __comprobarNumero(frase,tipo,cadena):
+#     salida=False
+#     while not salida:
+#         if cadena == '':
+#             Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
+#             cadena=Input(frase,line=1,column=5)
+#         clearLine(25)
+#         if tipo=='dia' or tipo=='mes':
+#             if len(cadena)<=2 and cadena!='0':
+#                 try:
+#                     numero=int(cadena)
+#                     salida=True
+#                 except:
+#                     Print('{} no es un número'.format(cadena),line=25,column=1,style='bold',color='yellow', back='red')
+#                     cadena=Input(frase,line=1,column=5)
+#                 clearLine(25)
+#             else:
+#                 Print('ERROR!!!! El {} no puede tener mas de 2 números y no ser 0'.format(tipo),line=25,column=1,style='bold',color='yellow', back='red')
+#                 cadena=Input(frase,line=1,column=5)
+#             clearLine(25)
+#         if tipo=='año':
+#             if len(cadena)==4 and cadena!='0':
+#                 try:
+#                     numero=int(cadena)
+#                     salida=True
+#                 except:
+#                     Print('{} no es un número'.format(cadena),line=25,column=1,style='bold',color='yellow', back='red')
+#                     cadena=Input(frase,line=1,column=5)
+#                 clearLine(25)
+#             else:
+#                 Print('ERROR!!!! El año tiene que tener 4 números o no ser 0',line=25,column=1,style='bold',color='yellow', back='red')
+#                 cadena=Input(frase,line=1,column=5)
+#             clearLine(25)
+#     return numero
+
+# def ultimoNumero(strNumero):
+#     strNumero=str(strNumero)
+#     return int(strNumero[-1])
+
+# def comprobarFecha(fecha):
+#     actual=datetime.now()
+#     nacimiento=False
+#     while not nacimiento:
+#         if fecha[0]>1900 and fecha[2]<=(actual.year-1):
+#             nacimiento=True
+#         elif fecha[2]<=actual.year:
+#             if fecha[1]<=actual.month:
+#                 if fecha[2]<=actual.day:
+#                     # Fecha correcta
+#                     nacimiento=True
+#                 else:
+#                     # Fecha incorrecta, volver a comprobar de nuevo dia
+#                     Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+#                     strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('dia'),line=1,column=5)
+#                     fecha[2]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('dia'),'dia',strNumero)
+#                 clearLine(25)
+#             else:
+#                 # Fecha incorrecta, volver a comprobar de nuevo mes
+#                 Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+#                 strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('mes'),line=1,column=5)
+#                 fecha[1]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('mes'),'mes',strNumero)
+#             clearLine(25)
+#         else:
+#             # Fecha incorrecta, volver a comprobar de nuevo mes
+#             Print('Todavia no has nacido',line=25,column=1,style='bold',color='yellow', back='red')
+#             strNumero=Input('Introduce el {} que naciste: (Formato númerico) '.format('año'),line=1,column=5)
+#             fecha[0]=__comprobarNumero('Introduce el {} que naciste: (Formato númerico)'.format('año'),'año',strNumero)
+#         clearLine(25)
+#     return fecha
 
 def armaTrajeSuperpoder(fecha):
     sh=[]
