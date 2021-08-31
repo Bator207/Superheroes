@@ -9,19 +9,20 @@ def frase(sh,co,ar,sp):
 # Funcion para sacar la primera y comprobar que sea correcta
 def comprobarNombre(dic,frase):
     salida=False
-    cadena=Input(frase,line=1,column=5)
     while not salida:
+        cadena=Input(frase,line=1,column=5)
         if cadena == '':
             Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
-            cadena=Input(frase,line=1,column=5)
-        clearLine(25)
+            continue
+            # cadena=Input(frase,line=1,column=5)
+        # clearLine(25)
         letra=cadena[0].upper()
         if letra in dic:
             salida=True
+            clearLine(25)
         else:
             Print('{} no es una letra'.format(cadena[0]),line=25,column=1,style='bold',color='yellow', back='red')
-            cadena=Input(frase,line=1,column=5)
-        clearLine(25)
+            # cadena=Input(frase,line=1,column=5)
     return dic[letra]
 
 # Funcion donde se pide la fecha de nacimiento
