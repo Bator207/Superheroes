@@ -55,32 +55,40 @@ def pedirFecha():
                     continue
             elif i == 'mes':
                 if len(cadena)<=2 and cadena!='0':
-                    if fecha[0]==actual.year:
-                        if numero<=actual.month:
+                    if numero in mes:
+                        if fecha[0]==actual.year:
+                            if numero<=actual.month:
+                                fecha.append(numero)
+                                nacimiento=True
+                            else:
+                                Print('ERROR!!!! Mes incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
+                                continue
+                        else:
                             fecha.append(numero)
                             nacimiento=True
-                        else:
-                            Print('ERROR!!!! Mes incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
-                            continue
                     else:
-                        fecha.append(numero)
-                        nacimiento=True
+                        Print('ERROR!!!! Mes incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
+                        continue
                 else:
                     Print('ERROR!!!! No puede ser 0 o tener una longuitud mayor de 2 a digitos',line=25,column=1,style='bold',color='yellow', back='red')
                     continue
             else:
                 #Falta comprobar que esta en el rango
                 if len(cadena)<=2 and cadena!='0':
-                    if fecha[1]==actual.month:
-                        if numero<=actual.day:
+                    if numero in dia:
+                        if fecha[1]==actual.month:
+                            if numero<=actual.day:
+                                fecha.append(numero)
+                                nacimiento=True
+                            else:
+                                Print('ERROR!!!! Dia incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
+                                continue
+                        else:
                             fecha.append(numero)
                             nacimiento=True
-                        else:
-                            Print('ERROR!!!! Dia incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
-                            continue
                     else:
-                        fecha.append(numero)
-                        nacimiento=True
+                        Print('ERROR!!!! Dia incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
+                        continue
                 else:
                     Print('ERROR!!!! No puede ser 0 o tener una longuitud mayor de 2 a digitos',line=25,column=1,style='bold',color='yellow', back='red')
                     continue
