@@ -6,13 +6,13 @@ from presentacion import *
 def frase(sh,co,ar,sp):
     return ('Soy {} {}, mi poder es el {} y voy a luchar contra la injusticia con mi {}!!'.format(sh,co,sp,ar))
 
-# Funcion para sacar la primera y comprobar que sea correcta
+# Función para sacar la primera y comprobar que sea correcta
 def comprobarNombre(dic,frase):
     salida=False
     while not salida:
         cadena=Input(frase,line=1,column=5)
         if cadena == '':
-            Print('ERROR!!!! No puede ser vacio',line=25,column=1,style='bold',color='yellow', back='red')
+            Print('ERROR!!!! No puede ser vació',line=25,column=1,style='bold',color='yellow', back='red')
             continue
         letra=cadena[0].upper()
         if letra in dic:
@@ -22,7 +22,7 @@ def comprobarNombre(dic,frase):
             Print('{} no es una letra'.format(cadena[0]),line=25,column=1,style='bold',color='yellow', back='red')
     return dic[letra]
 
-# Funcion donde se pide la fecha de nacimiento
+# Función donde se pide la fecha de nacimiento
 def pedirFecha():
     fecha=[]
     tipo=('año','mes','dia')
@@ -34,7 +34,7 @@ def pedirFecha():
         while not nacimiento:
             cadena=Input(frase,line=1,column=5)
             clearLine(25)
-            # Comprobamos si es un numero
+            # Comprobamos si es un número
             try:
                 numero=int(cadena)
             except:
@@ -42,7 +42,7 @@ def pedirFecha():
                 continue
             # Comprobamos que sea año
             if i == 'año':
-                # Comprobamos si la longuitud del año es de 4 o diferente de 0
+                # Comprobamos si la longitud del año es de 4 o diferente de 0
                 if len(cadena)==4 and cadena!='0':
                     # Comprobamos que el año este entre 1920 y año actual
                     if numero>=1920 and numero<=actual.year:
@@ -53,11 +53,11 @@ def pedirFecha():
                         Print("ERROR!!!! Año incorrecto",line=25,column=1,style='bold',color='yellow', back='red')
                         continue
                 else:
-                    Print('ERROR!!!! No puede ser 0 o tener una longuitud diferente de 4 digitos',line=25,column=1,style='bold',color='yellow', back='red')
+                    Print('ERROR!!!! No puede ser 0 o tener una longitud diferente de 4 digitos',line=25,column=1,style='bold',color='yellow', back='red')
                     continue
             # Comprobamos que sea mes
             elif i == 'mes':
-                # Comprobamos si la longuitud del mes es menor o igual a 2 o diferente de 0
+                # Comprobamos si la longitud del mes es menor o igual a 2 o diferente de 0
                 if len(cadena)<=2 and cadena!='0':
                     # Comprobamos que el numero este en el rango de los meses
                     if numero in mes:
@@ -78,33 +78,36 @@ def pedirFecha():
                         Print('ERROR!!!! Mes incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
                         continue
                 else:
-                    Print('ERROR!!!! No puede ser 0 o tener una longuitud mayor de 2 a digitos',line=25,column=1,style='bold',color='yellow', back='red')
+                    Print('ERROR!!!! No puede ser 0 o tener una longitud mayor de 2 a digitos',line=25,column=1,style='bold',color='yellow', back='red')
                     continue
-            # Comprobamos que sea el dia
-            else:
+            # Comprobamos que sea el Día
+            elif i == 'dia':
                 #Falta comprobar que esta en el rango
                 if len(cadena)<=2 and cadena!='0':
-                    # Comprobamos que el numero este en el rango de los dias
+                    # Comprobamos que el numero este en el rango de los Días
                     if numero in dia:
                         # Comprobamos si es el mes actual
                         if fecha[1]==actual.month:
-                            # Comprobamos que el dia sea menor o igual al actual
+                            # Comprobamos que el Día sea menor o igual al actual
                             if numero<=actual.day:
-                                # Agregamos el dia a la fecha
+                                # Agregamos el Día a la fecha
                                 fecha.append(numero)
                                 nacimiento=True
                             else:
-                                Print('ERROR!!!! Dia incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
+                                Print('ERROR!!!! Día incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
                                 continue
                         else:
                             fecha.append(numero)
                             nacimiento=True
                     else:
-                        Print('ERROR!!!! Dia incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
+                        Print('ERROR!!!! Día incorrecto',line=25,column=1,style='bold',color='yellow', back='red')
                         continue
                 else:
-                    Print('ERROR!!!! No puede ser 0 o tener una longuitud mayor de 2 a digitos',line=25,column=1,style='bold',color='yellow', back='red')
+                    Print('ERROR!!!! No puede ser 0 o tener una longitud mayor de 2 a digitos',line=25,column=1,style='bold',color='yellow', back='red')
                     continue
+            else:
+                Print('ERROR!!!!',line=25,column=1,style='bold',color='yellow', back='red')
+                continue
     return fecha
 
 # Sacamos el ultimo número 
@@ -126,4 +129,4 @@ if __name__=='__main__':
     superheroe="{} {}".format(comprobarNombre(nombre,'Introduce tu nombre: '),comprobarNombre(apellido,'Introduce tu apellido: '))
     f=pedirFecha()
     sh=armaTrajeSuperpoder(f)
-    Print(frase(superheroe,sh[2],sh[0],sh[1]),line=5,column=5)
+    Print(frase(superheroe,sh[2],sh[0],sh[1]),line=5,column=5,style='bold',color='red', back='green')
