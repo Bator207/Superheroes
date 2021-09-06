@@ -85,7 +85,7 @@ def pedirFecha():
                 #Falta comprobar que esta en el rango
                 if len(cadena)<=2 and cadena!='0':
                     # Comprobamos que el numero este en el rango de los Días
-                    if numero in dia:
+                    if numero in dia and numero<=meses[fecha[1]]:
                         # Comprobamos si es el mes actual
                         if fecha[1]==actual.month:
                             # Comprobamos que el Día sea menor o igual al actual

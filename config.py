@@ -33,3 +33,7 @@ dia={
     21:'Escoba', 22:'Dagas', 23:'Bumerangs', 24:'Estrellas Ninja', 25:'Extintor', 26:'Tijeras', 27:'Destapacaños',
     28:'Lanza Misiles',  29:'Bastón de Jokey', 30:'Cepillo de dientes', 31:'Espada Mágica'
 }
+
+meses={
+    1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31
+}
